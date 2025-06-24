@@ -6,13 +6,13 @@ import { dataContext } from '../usecontext/UseContext';
 import { food_items } from '../food';
 
 function Nav() {
-  const { input, setInput, setCate } = useContext(dataContext);
+  const { input, setInput, setCate,showCart,setShowCart } = useContext(dataContext);
 
   useEffect(() => {
     const filteredItems = food_items.filter(item =>
       item.food_name.toLowerCase().includes(input.toLowerCase())
     );
-    setCate(filteredItems); // ✅ Apply filtered result to state
+    setCate(filteredItems); 
   }, [input]);
 
   return (
@@ -35,7 +35,7 @@ function Nav() {
         />
       </form>
 
-      <div className='w-[60px] h-[60px] bg-amber-50 flex justify-center items-center rounded-b-md shadow-2xl relative'>
+      <div className='w-[60px] h-[60px] bg-amber-50 flex justify-center items-center rounded-b-md shadow-2xl relative cursor-pointer' onClick={()=> setShowCart(true)}>
         <span className='absolute top-0 right-2 font-bold text-green-500 text-[18px]'>0</span>
         <FaCartPlus className='w-[30px] h-[30px] text-green-500' />
       </div>

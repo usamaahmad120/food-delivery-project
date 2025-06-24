@@ -2,7 +2,6 @@ import React from 'react';
 import { LuLeafyGreen } from "react-icons/lu";
 import { GiChickenOven } from "react-icons/gi";
 function Cards({ name, image, id, price, type }) {
-  console.log("Props:", { name, image, id, price, type });
 
   return (
     <div className='w-[300px] h-[420px] bg-amber-50 p-4 shadow-lg rounded-lg hover:border-3 border-green-300'>
@@ -17,7 +16,7 @@ function Cards({ name, image, id, price, type }) {
           Rs: {price}
         </div>
         <div className='flex items-center gap-2 text-green-500 text-lg font-semibold'>
-          {type==="veg"?<LuLeafyGreen/> :<GiChickenOven /> }
+          {type==="veg"?<LuLeafyGreen/> : <GiChickenOven /> }
            <span>{type}</span>
         </div>
       </div>
