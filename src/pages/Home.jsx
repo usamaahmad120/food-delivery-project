@@ -34,7 +34,8 @@ function Home() {
           {Categories.map((items, index) => (
             <div
               key={items.name} 
-              className="bg-amber-50 w-[140px] h-[140px] flex flex-col gap-5 p-5 justify-start font-semibold text-[20px] shadow-2xl text-gray-600 rounded-lg hover:bg-green-200 cursor-pointer transition-all duration-200"
+              className="bg-amber-50 w-[140px] h-[140px] flex flex-col gap-5 p-5 justify-center items-center text-center font-semibold text-[20px] shadow-2xl text-gray-600 rounded-lg hover:bg-orange-200 cursor-pointer transition-all duration-200"
+
               onClick={() => filterCategory(items.name)}
             >
               {items.icone}
@@ -59,8 +60,8 @@ function Home() {
           ))}
         <div className={` w-full md:w-[40vw] h-[100%] bg-white top-0 right-0 fixed shadow-xl transition-all duration-700 ${showCart?"translate-0" : "translate-x-full"}`}>
         <header className="w-[100%] flex justify-between p-6">
-          <span className="font-semibold text-[18px] text-green-400">Food Items</span>
-          <span className="w-[30px] h-[30px] text-green-400 text-[20px] font-semibold cursor-pointer hover:text-gray-600" onClick={()=> setShowCart(false)}><RxCross2 /></span>
+          <span className="font-semibold text-[18px] text-orange-500">Food Items</span>
+          <span className="w-[30px] h-[30px] text-orange-500 text-[20px] font-semibold cursor-pointer hover:text-gray-600" onClick={()=> setShowCart(false)}><RxCross2 /></span>
         </header>
         <Card2/>
       </div>
