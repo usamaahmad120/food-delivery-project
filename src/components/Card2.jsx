@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { addToCart, } from '../feature/CartSlice'; 
+import { addToCart, removeFromCart, decreaseQuantity } from '../feature/CartSlice';
 
 function Card2() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -48,7 +48,7 @@ function Card2() {
             {/* Right: Price and delete */}
             <div className='flex flex-col justify-start items-end gap-6 mr-2'>
               <span className='text-lg font-semibold text-orange-400'>
-                Rs : {item.price * item.quantity}
+                Rs: {item.price * item.quantity}
               </span>
               <span
                 className='text-lg font-bold text-red-400 text-[25px] cursor-pointer hover:text-gray-200'

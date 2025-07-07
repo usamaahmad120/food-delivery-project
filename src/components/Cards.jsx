@@ -3,6 +3,7 @@ import { LuLeafyGreen } from "react-icons/lu";
 import { GiChickenOven } from "react-icons/gi";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../feature/CartSlice';
+import { removeFromCart, decreaseQuantity } from '../feature/CartSlice';
 
 function Cards({ name, image, id, price, type }) {
   const dispatch = useDispatch();
