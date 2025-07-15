@@ -1,4 +1,6 @@
 import React, { useContext, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Nav from "../components/Nav";
 import Categories from "../Categories";
 import Cards from "../components/Cards";
@@ -7,10 +9,12 @@ import { dataContext } from "../usecontext/UseContext";
 import { RxCross2 } from "react-icons/rx";
 import Card2 from "../components/Card2";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
+import Login from "../components/Login";
 
 function Home() {
-  const { cate, setCate, input, showCart, setShowCart } = useContext(dataContext);
-  
+  const { cate, setCate, input, showCart, setShowCart } =
+    useContext(dataContext);
 
   useEffect(() => {
     setCate(food_items);
@@ -32,9 +36,9 @@ function Home() {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const deleveryFee = 150;
-  const tax = Math.round(subtotal * 0.1);
-  const total = subtotal + deleveryFee + tax;
+  const deliveryFee = cartItems.length === 0 ? 0 : 150;
+  const tax = Math.round(subtotal * 0.01);
+  const total = subtotal + deliveryFee + tax;
 
   return (
     <div className="bg-slate-200 w-full min-h-screen">
@@ -97,33 +101,50 @@ function Home() {
         {/* Total Section */}
         <div className="border-t border-gray-300 px-4 py-2 bg-white space-y-2">
           <div className="flex justify-between">
-            <span className="text-base font-medium text-orange-300">Subtotal</span>
-            <span className="text-base font-semibold text-orange-500">Rs {subtotal}/-</span>
+            <span className="text-base font-medium text-orange-300">
+              Subtotal
+            </span>
+            <span className="text-base font-semibold text-orange-500">
+              Rs {subtotal}/-
+            </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-base font-medium text-orange-300">Delivery Fee</span>
-            <span className="text-base font-semibold text-orange-500">Rs {deleveryFee}/-</span>
+            <span className="text-base font-medium text-orange-300">
+              Delivery Fee
+            </span>
+            <span className="text-base font-semibold text-orange-500">
+             {deliveryFee === 0 ? "Rs 0/-" : `Rs ${deliveryFee}/-`}
+            </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-base font-medium text-orange-300">Tax (10%)</span>
-            <span className="text-base font-semibold text-orange-500">Rs {tax}/-</span>
+            <span className="text-base font-medium text-orange-300">
+              Tax (5%)
+            </span>
+            <span className="text-base font-semibold text-orange-500">
+              Rs {tax}/-
+            </span>
           </div>
           <div className="border-t border-gray-300 my-1" />
           <div className="flex justify-between">
             <span className="text-lg font-bold text-orange-400">Total</span>
-            <span className="text-lg font-bold text-orange-600">Rs {total}/-</span>
+            <span className="text-lg font-bold text-orange-600">
+              Rs {total}/-
+            </span>
           </div>
         </div>
         <div className="px-4 pb-4">
-  <button
-    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all duration-300"
-    onClick={() => alert("Proceeding to checkout...")}
-  >
-    Checkout
-  </button>
-</div>
+          <button
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all duration-300"
+            onClick={() => alert("Proceeding to checkout...")}
+          >
+            Checkout
+          </button>
+        </div>
       </div>
-      
+
+    <Footer/>
+    <Login/>
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 }

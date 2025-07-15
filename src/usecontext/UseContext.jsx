@@ -5,6 +5,8 @@ function UseContext({children}) {
   const [input, setInput] = useState("");
   const [cate, setCate] = useState([food_items]);
   const [showCart, setShowCart] = useState(false)
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
   let data ={
     input, 
     setInput,
@@ -12,6 +14,8 @@ function UseContext({children}) {
     setCate,
     showCart,
     setShowCart,
+    showLoginForm, 
+    setShowLoginForm
   }
   return (
     <div>
