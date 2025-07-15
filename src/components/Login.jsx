@@ -30,7 +30,7 @@ function Login() {
     setPhone(val);
 
     if (val.length > 0 && val.length !== 11) {
-      setPhoneError("📱 Phone number must be exactly 11 digits");
+      setPhoneError("Phone number must be exactly 11 digits");
     } else {
       setPhoneError("");
     }
@@ -42,7 +42,7 @@ function Login() {
     setPassword(val);
 
     if (val.length > 0 && val.length < 6) {
-      setPassError("🔒 Password must be at least 6 characters");
+      setPassError("Password must be at least 6 characters");
     } else {
       setPassError("");
     }
