@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { dataContext } from "../usecontext/UseContext";
 
 function Login() {
@@ -9,45 +9,59 @@ function Login() {
   const [phoneError, setPhoneError] = useState("");
   const [passError, setPassError] = useState("");
 
+  // ✅ Close login form on scroll
+  useEffect(() => {
+    if (!showLoginForm) return; // only listen if open
+
+    const handleScroll = () => {
+      setShowLoginForm(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showLoginForm, setShowLoginForm]);
+
   if (!showLoginForm) return null;
 
-  //  Validate phone on change
+  // ✅ Phone validation
   const handlePhoneChange = (e) => {
-    const val = e.target.value.replace(/\D/g, ""); 
+    const val = e.target.value.replace(/\D/g, ""); // only digits
     setPhone(val);
 
     if (val.length > 0 && val.length !== 11) {
-      setPhoneError("Phone number must be exactly 11 digits");
+      setPhoneError("📱 Phone number must be exactly 11 digits");
     } else {
       setPhoneError("");
     }
   };
 
-  // Validate password on change
+  // ✅ Password validation
   const handlePasswordChange = (e) => {
     const val = e.target.value;
     setPassword(val);
 
     if (val.length > 0 && val.length < 6) {
-      setPassError(" Password must be at least 6 characters");
+      setPassError("🔒 Password must be at least 6 characters");
     } else {
       setPassError("");
     }
   };
 
+  // ✅ Check if form is valid
   const isFormValid =
     phone.length === 11 && password.length >= 6 && !phoneError && !passError;
 
   const handleLogin = () => {
     if (!isFormValid) return;
-    
+    console.log("✅ Logged in with phone:", phone);
     setShowLoginForm(false);
   };
 
   return (
-    <div className="fixed top-20 right-30 z-50">
+    <div className="fixed top-24 right-10 z-50">
       <div className="bg-white p-6 rounded-xl shadow-xl w-[320px] relative">
-        {/* Close Button */}
+        {/* ❌ Close Button */}
         <button
           className="absolute top-2 right-3 text-gray-500 hover:text-red-500"
           onClick={() => setShowLoginForm(false)}
@@ -97,15 +111,15 @@ function Login() {
           )}
         </div>
 
-        {/* login button */}
+        {/* ✅ Login button */}
         <button
           className={`w-full py-2 rounded mt-2 transition-all ${
             isFormValid
               ? "bg-orange-500 hover:bg-orange-600 text-white"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          onClick={handleLogin}
           disabled={!isFormValid}
+          onClick={handleLogin}
         >
           Login
         </button>
