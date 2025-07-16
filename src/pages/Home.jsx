@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import Nav from "../components/Nav";
 import Categories from "../Categories";
 import Cards from "../components/Cards";
@@ -11,15 +12,16 @@ import Card2 from "../components/Card2";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Login from "../components/Login";
-
+import AuthModal from "../components/AuthModal";
 function Home() {
-  const { cate, setCate, input, showCart, setShowCart } =
-    useContext(dataContext);
+  const { cate, setCate, input, showCart, setShowCart } = useContext(dataContext);
 
+  // Load all food items initially
   useEffect(() => {
     setCate(food_items);
   }, []);
 
+  // Category filter logic
   function filterCategory(Category) {
     if (Category === "All") {
       setCate(food_items);
@@ -31,20 +33,22 @@ function Home() {
     }
   }
 
+  // Cart calculation
   const cartItems = useSelector((state) => state.cart.items);
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const deliveryFee = cartItems.length === 0 ? 0 : 150;
-  const tax = Math.round(subtotal * 0.01);
+  const tax = Math.round(subtotal * 0.05); // 5% tax
   const total = subtotal + deliveryFee + tax;
 
   return (
     <div className="bg-slate-200 w-full min-h-screen">
+      {/*  Navbar */}
       <Nav />
 
-      {/* Categories */}
+      {/* Categories Section */}
       {!input && (
         <div className="flex flex-wrap justify-center items-center gap-5 w-full mb-5">
           {Categories.map((items) => (
@@ -74,13 +78,13 @@ function Home() {
         ))}
       </div>
 
-      {/* Cart Sidebar */}
+      {/*  Cart Sidebar */}
       <div
         className={`w-full md:w-[40vw] h-screen fixed top-0 right-0 bg-white shadow-xl transition-all duration-700 flex flex-col z-50 ${
           showCart ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Header */}
+        {/* Cart Header */}
         <header className="w-full flex justify-between p-6 border-b border-gray-200">
           <span className="font-semibold text-[18px] text-orange-500">
             Food Items
@@ -93,12 +97,12 @@ function Home() {
           </span>
         </header>
 
-        {/* Scrollable Cart Content */}
+        {/* Cart Content */}
         <div className="flex-1 overflow-y-auto px-4">
           <Card2 />
         </div>
 
-        {/* Total Section */}
+        {/* Cart Total */}
         <div className="border-t border-gray-300 px-4 py-2 bg-white space-y-2">
           <div className="flex justify-between">
             <span className="text-base font-medium text-orange-300">
@@ -113,7 +117,7 @@ function Home() {
               Delivery Fee
             </span>
             <span className="text-base font-semibold text-orange-500">
-             {deliveryFee === 0 ? "Rs 0/-" : `Rs ${deliveryFee}/-`}
+              {deliveryFee === 0 ? "Rs 0/-" : `Rs ${deliveryFee}/-`}
             </span>
           </div>
           <div className="flex justify-between">
@@ -142,8 +146,12 @@ function Home() {
         </div>
       </div>
 
-    <Footer/>
-    <Login/>
+      {/* Footer */}
+      <Footer />
+
+      <AuthModal />
+
+      {/* Toast Notifications */}
       <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
