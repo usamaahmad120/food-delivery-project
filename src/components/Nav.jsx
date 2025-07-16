@@ -35,7 +35,7 @@ function Nav() {
   const handleLogout = () => {
     localStorage.removeItem("loggedUser");
     setLoggedUser(null);
-    toast.success("👋 Logged out successfully!");
+    toast.success("Logged out successfully!");
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function Nav() {
           <MdFastfood className="w-[25px] h-[25px] sm:w-[30px] sm:h-[30px] text-orange-500" />
         </div>
         <span className="text-orange-500 font-bold text-lg sm:text-xl">
-          FoodApp
+          Food Express
         </span>
       </div>
 
