@@ -7,6 +7,7 @@ function Card2() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
+
   return (
     <div className='w-full space-y-4 p-3'>
       {cartItems.length === 0 ? (
